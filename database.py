@@ -1,10 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from constants import *
 
-#SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-# SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root:faridabad2000@localhost:3306/restapi"
+SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://root:{PASSWORD}@localhost:3306/{DATABASE_NAME}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
