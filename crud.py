@@ -36,6 +36,18 @@ def add_disaster(db: Session, disaster: schemas.DisasterCreate):
     db.refresh(db_user)
     return db_user
 
+
+
+def get_emergency_services(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.EmergencyService).offset(skip).limit(limit).all()
+
+def add_emergency_services(db: Session, emergencyservice: schemas.EmergencyServiceCreate):
+    db_user = models.EmergencyService(name=emergencyservice.name, location=emergencyservice.location)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
 # def get_items(db: Session, skip: int = 0, limit: int = 100):
 #     return db.query(models.Item).offset(skip).limit(limit).all()
 

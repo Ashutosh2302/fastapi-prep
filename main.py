@@ -54,6 +54,19 @@ def add_disaster(disaster: schemas.DisasterCreate, db: Session = Depends(get_db)
         raise HTTPException(status_code=400, detail="Disaster already present in the db")
     return crud.add_disaster(db=db, disaster=disaster)
 
+
+
+
+@app.get("/emergency_services/", response_model=List[schemas.EmergencyService])
+def get_emergency_services(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    ES = crud.get_emergency_services(db, skip=skip, limit=limit)
+    return ES
+
+@app.post("/emergency_services/", response_model=schemas.EmergencyService)
+def add_emergency_service(emergencyservice: schemas.EmergencyServiceCreate, db: Session = Depends(get_db)):
+    return crud.add_emergency_services(db=db, emergencyservice=emergencyservice)
+
+
 # @app.post("/users/{user_id}/items/", response_model=schemas.Item)
 # def create_item_for_user(
 #     user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)

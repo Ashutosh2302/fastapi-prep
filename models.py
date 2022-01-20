@@ -22,16 +22,12 @@ class Disaster(Base):
     name = Column(String(50), unique=True, index=True)
     
 
-# class EmergencyService(Base):
-#     __tablename__ = "emergency_services"
+class EmergencyService(Base):
+    __tablename__ = "emergency_services"
 
-#     id = Column(Integer, primary_key=True, index=True)
-#     email = Column(String(50), unique=True, index=True)
-#     hashed_password = Column(String(50))
-#     is_active = Column(Boolean, default=True)
-
-#     items = relationship("Item", back_populates="owner")
-
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(50), unique=True, index=True)
+    location = Column(String(50), index=True)
 
 # class Item(Base):
 #     __tablename__ = "items"

@@ -38,6 +38,9 @@ class User(UserBase):
     class Config:
         orm_mode = True
 
+
+
+
 class DisasterBase(BaseModel):
     name: str
 
@@ -45,6 +48,22 @@ class DisasterCreate(DisasterBase):
     pass
 
 class Disaster(DisasterBase):
+    id: int
+    class Config:
+        orm_mode = True
+
+
+
+
+
+class EmergencyServiceBase(BaseModel):
+    name: str
+    location: str
+
+class EmergencyServiceCreate(EmergencyServiceBase):
+    pass
+
+class EmergencyService(EmergencyServiceBase):
     id: int
     class Config:
         orm_mode = True
