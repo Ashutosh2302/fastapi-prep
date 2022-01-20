@@ -42,14 +42,26 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
-@app.post("/users/{user_id}/items/", response_model=schemas.Item)
-def create_item_for_user(
-    user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
-):
-    return crud.create_user_item(db=db, item=item, user_id=user_id)
+@app.get("/disasters/", response_model=List[schemas.Disaster])
+def get_disasters(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    disasters = crud.get_disasters(db, skip=skip, limit=limit)
+    return disasters
+
+@app.post("/disasters/", response_model=schemas.Disaster)
+def add_disaster(disaster: schemas.DisasterCreate, db: Session = Depends(get_db)):
+    db_user = crud.get_disaster_by_name(db, name=disaster.name)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Disaster already present in the db")
+    return crud.add_disaster(db=db, disaster=disaster)
+
+# @app.post("/users/{user_id}/items/", response_model=schemas.Item)
+# def create_item_for_user(
+#     user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
+# ):
+#     return crud.create_user_item(db=db, item=item, user_id=user_id)
 
 
-@app.get("/items/", response_model=List[schemas.Item])
-def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    items = crud.get_items(db, skip=skip, limit=limit)
-    return items
+# @app.get("/items/", response_model=List[schemas.Item])
+# def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+#     items = crud.get_items(db, skip=skip, limit=limit)
+#     return items
