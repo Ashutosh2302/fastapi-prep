@@ -55,8 +55,6 @@ def add_disaster(disaster: schemas.DisasterCreate, db: Session = Depends(get_db)
     return crud.add_disaster(db=db, disaster=disaster)
 
 
-
-
 @app.get("/emergency_services/", response_model=List[schemas.EmergencyService])
 def get_emergency_services(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     ES = crud.get_emergency_services(db, skip=skip, limit=limit)
@@ -76,5 +74,5 @@ def add_emergency_service(emergencyservice: schemas.EmergencyServiceCreate, db: 
 
 # @app.get("/items/", response_model=List[schemas.Item])
 # def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-#     items = crud.get_items(db, skip=skip, limit=limit)
+#     items = crud.get_items(db, skip=skip, limit=limit)o
 #     return items
